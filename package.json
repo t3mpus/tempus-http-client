@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/t3mpus/tempus-http-client/issues"
   },
-  "homepage": "https://github.com/t3mpus/tempus-http-client"
+  "homepage": "https://github.com/t3mpus/tempus-http-client",
+  "dependencies": {
+    "request": "^2.34.0"
+  }
 }
