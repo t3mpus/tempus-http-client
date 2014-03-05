@@ -8,9 +8,9 @@ describe 'User Creations', ->
 
   before -> session = new index()
 
-  it 'should allow user creation', ->
+  it 'should allow user creation', (done) ->
     email = uuid.v1() + "-test-user@email.com"
-    session.createUser {
+    session.user.createUser {
       firstName: 'Test'
       lastName: 'User'
       email: email
