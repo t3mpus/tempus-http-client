@@ -10,7 +10,4 @@ class TempusHTTPClient
     _.each modules, (m)=>
       @[m] = require("./#{m}")(ops)
 
-
-
-
 module.exports = TempusHTTPClient

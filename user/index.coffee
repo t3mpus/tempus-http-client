@@ -1,6 +1,9 @@
-class User
+class User extends require('../base.coffee')
 
-  createUser: ()->
+  resource: "users"
+
+  createUser: (ops, cb)->
+    @request @post, @route(), ops, cb
 
 module.exports = (ops)->
   new User ops
