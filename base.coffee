@@ -14,5 +14,8 @@ class Base
     @resource
 
   request: (method, uri, body, cb) ->
+    fun = request[method]
+    if !fun
+      throw new Error "Request doesn't have #{method} defined"
 
 module.exports = Base
