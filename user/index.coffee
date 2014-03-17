@@ -10,7 +10,7 @@ class User extends require('../base.coffee')
         cb {
           statusCode: res.statusCode
           message: body.error
-        }, body
+        }
 
 module.exports = (ops)->
   new User ops
