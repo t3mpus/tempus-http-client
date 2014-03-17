@@ -25,3 +25,15 @@ describe 'User Creations', ->
       user.credentials.should.have.property 'secret'
       user.credentials.should.have.property 'user_identifier'
       done()
+
+  it 'should not allow a user without proper info register', (done)->
+    session.user.createUser {
+      firstNAME: 'bad'
+      lastNAME: 'user'
+      email: 'www.google.com'
+      password: '#sorrynotsorry'
+    }, (err, user) ->
+      err.should.have.property 'statusCode', 400
+      err.should.have.property 'message'
+      throw new Error "User object shouldn't be defined" if user
+      done()
