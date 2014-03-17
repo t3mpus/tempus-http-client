@@ -9,6 +9,7 @@ class User extends require('../base.coffee')
       else
         cb {
           statusCode: res.statusCode
+          message: body.error
         }, body
 
 module.exports = (ops)->
