@@ -24,7 +24,8 @@
   "homepage": "https://github.com/t3mpus/tempus-http-client",
   "dependencies": {
     "request": "^2.34.0",
-    "underscore": "^1.6.0"
+    "underscore": "^1.6.0",
+    "mocha": "^1.18.0"
   },
   "devDependencies": {
     "should": "^3.1.3",
