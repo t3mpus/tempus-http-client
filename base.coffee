@@ -23,7 +23,7 @@ class Base
     else
       console.log 'Client running in production mode'
       throw new Error """
-        We are not reading to target anything but development
+        We are not ready to target anything but development
         """
     s = "#{host}"
     if port
