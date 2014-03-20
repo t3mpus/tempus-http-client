@@ -2,11 +2,11 @@ should = require 'should'
 index = require '../session-store'
 uuid = require 'uuid'
 
-describe 'User Creations', ->
+describe 'User deletion', ->
 
   session = null
 
-  before -> session = new index()
+  before -> session = index()
 
   it 'should allow user deletion', (done) ->
     email = uuid.v1() + "-test-user@email.com"
@@ -18,5 +18,6 @@ describe 'User Creations', ->
     }, (err, user) ->
       throw err if err
       session.user.delete user.id, (err)->
-        throw err if err
+        console.log err
+        throw new Error err.message if err?
         done()

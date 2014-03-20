@@ -1,5 +1,5 @@
 users = []
-session = new require('../session-store')
+session = require('../session-store')()
 {filter} = require 'async'
 
 module.exports =

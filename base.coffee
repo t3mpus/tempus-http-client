@@ -2,12 +2,6 @@ request = require 'request'
 
 class Base
 
-  post: "post"
-  get: "get"
-  delete: "del"
-  put: "put"
-  head: "head"
-
   constructor: (@options)->
 
   route: (ex, qs)->
@@ -29,11 +23,9 @@ class Base
     if port
       s += ":#{port}"
     if uri
-      s += "/#{encodeURIComponent uri}"
+      s += "/#{uri}"
 
     return s
-
-
 
   req_options: (uri, body) ->
     url: @url uri
@@ -49,6 +41,7 @@ class Base
 
     if typeof body is 'function'
       cb = body
+      body = null
 
     options = @req_options uri, body
 
