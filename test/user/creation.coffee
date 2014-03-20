@@ -1,5 +1,6 @@
 should = require 'should'
 index = require '../session-store'
+sweeper = require './sweeper'
 uuid = require 'uuid'
 
 describe 'User Creations', ->
@@ -7,6 +8,8 @@ describe 'User Creations', ->
   session = null
 
   before -> session = new index()
+
+  after (done) -> sweeper.flush done
 
   it 'should allow user creation', (done) ->
     email = uuid.v1() + "-test-user@email.com"
@@ -24,6 +27,7 @@ describe 'User Creations', ->
       user.should.have.property 'credentials'
       user.credentials.should.have.property 'secret'
       user.credentials.should.have.property 'user_identifier'
+      sweeper.add user
       done()
 
   it 'should not allow a user without proper info register', (done)->

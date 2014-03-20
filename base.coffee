@@ -1,12 +1,7 @@
 request = require 'request'
+credentials = require './credentials'
 
 class Base
-
-  post: "post"
-  get: "get"
-  delete: "del"
-  put: "put"
-  head: "head"
 
   constructor: (@options)->
 
@@ -29,16 +24,16 @@ class Base
     if port
       s += ":#{port}"
     if uri
-      s += "/#{encodeURIComponent uri}"
+      s += "/#{uri}"
 
     return s
-
-
 
   req_options: (uri, body) ->
     url: @url uri
     json: true
     body: body if body
+    hawk:
+      credentials: credentials.get() if credentials.get()
 
   request: (method, uri, body, cb) ->
     fun = request[method]
@@ -49,6 +44,7 @@ class Base
 
     if typeof body is 'function'
       cb = body
+      body = null
 
     options = @req_options uri, body
 

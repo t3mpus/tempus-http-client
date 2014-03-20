@@ -9,4 +9,8 @@ describe 'index', ->
     should.equal undefined, index()
     (new index()).should.have.type 'object'
 
+  it 'should have a function setCredentials', ->
+    i = new index()
+    i.should.have.property 'setCredentials'
+    i.setCredentials.should.be.type 'function'
 
