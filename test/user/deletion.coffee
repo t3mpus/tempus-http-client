@@ -17,7 +17,7 @@ describe 'User deletion', ->
       password: "password"
     }, (err, user) ->
       throw err if err
+      session.setCredentials user.credentials
       session.user.delete user.id, (err)->
-        console.log err
         throw new Error err.message if err?
         done()

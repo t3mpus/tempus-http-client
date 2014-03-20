@@ -1,4 +1,5 @@
 request = require 'request'
+credentials = require './credentials'
 
 class Base
 
@@ -31,6 +32,8 @@ class Base
     url: @url uri
     json: true
     body: body if body
+    hawk:
+      credentials: credentials.get() if credentials.get()
 
   request: (method, uri, body, cb) ->
     fun = request[method]
