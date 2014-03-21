@@ -5,10 +5,9 @@ sweeper = require './sweeper'
 checker = require './checker'
 
 describe 'User Get', ->
+  session = index()
 
-  session = null
-
-  before -> session = index()
+  after (done) -> sweeper.flush done
 
   it 'should allow user get', (done) ->
     email = uuid.v1() + "-test-user@email.com"
@@ -19,6 +18,7 @@ describe 'User Get', ->
       password: "password"
     }, (err, user) ->
       throw err if err
+      sweeper.add user
       checker user, yes
       session.setCredentials user.credentials
       session.user.get user.id, (err, user)->
