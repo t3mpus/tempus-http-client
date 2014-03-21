@@ -23,4 +23,5 @@ describe 'User Get', ->
       session.setCredentials user.credentials
       session.user.get user.id, (err, user)->
         throw new Error err.message if err?
+        checker user, no
         done()
