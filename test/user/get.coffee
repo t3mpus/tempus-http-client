@@ -1,15 +1,15 @@
 should = require 'should'
 index = require '../session-store'
-checker = require './checker'
 uuid = require 'uuid'
+sweeper = require './sweeper'
+checker = require './checker'
 
-describe 'User deletion', ->
+describe 'User Get', ->
+  session = index()
 
-  session = null
+  after (done) -> sweeper.flush done
 
-  before -> session = index()
-
-  it 'should allow user deletion', (done) ->
+  it 'should allow user get', (done) ->
     email = uuid.v1() + "-test-user@email.com"
     session.user.createUser {
       firstName: 'Test'
@@ -18,8 +18,10 @@ describe 'User deletion', ->
       password: "password"
     }, (err, user) ->
       throw err if err
+      sweeper.add user
       checker user, yes
       session.setCredentials user.credentials
-      session.user.delete user.id, (err)->
+      session.user.get user.id, (err, user)->
         throw new Error err.message if err?
+        checker user, no
         done()

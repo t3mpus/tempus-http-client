@@ -2,6 +2,7 @@ should = require 'should'
 index = require '../session-store'
 sweeper = require './sweeper'
 uuid = require 'uuid'
+checker = require './checker'
 
 describe 'User Creations', ->
 
@@ -20,13 +21,7 @@ describe 'User Creations', ->
       password: "password"
     }, (err, user) ->
       throw err if err
-      user.should.have.property 'id'
-      user.should.have.property 'firstName', 'Test'
-      user.should.have.property 'lastName', 'User'
-      user.should.have.property 'email'
-      user.should.have.property 'credentials'
-      user.credentials.should.have.property 'secret'
-      user.credentials.should.have.property 'user_identifier'
+      checker user, yes
       sweeper.add user
       done()
 
