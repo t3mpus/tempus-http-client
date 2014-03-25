@@ -51,4 +51,32 @@ class Base
     fun options, (err, res, resBody)->
       cb res, resBody
 
+
+  handler: (verb, path, ops, cb) ->
+    if typeof ops is 'function'
+      cb = ops
+      ops = null
+
+    @request verb, path, ops, (res, body)->
+      if res.statusCode is 200
+        cb null, body
+      else
+        cb {
+          statusCode: res.statusCode
+          message: body.error
+        }
+
+  ###
+  # CRUD functionality
+  ###
+
+  create: (ops, cb)->
+    @handler "post", @route(), ops, cb
+
+  delete: (id, cb)->
+    @handler "del", "#{@route()}/#{id}", cb
+
+  get: (id, cb) ->
+    @handler "get", "#{@route()}/#{id}", cb
+
 module.exports = Base

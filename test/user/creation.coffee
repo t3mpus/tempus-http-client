@@ -14,7 +14,7 @@ describe 'User Creations', ->
 
   it 'should allow user creation', (done) ->
     email = uuid.v1() + "-test-user@email.com"
-    session.user.createUser {
+    session.user.create {
       firstName: 'Test'
       lastName: 'User'
       email: email
@@ -26,7 +26,7 @@ describe 'User Creations', ->
       done()
 
   it 'should not allow a user without proper info register', (done)->
-    session.user.createUser {
+    session.user.create {
       firstNAME: 'bad'
       lastNAME: 'user'
       email: 'www.google.com'
