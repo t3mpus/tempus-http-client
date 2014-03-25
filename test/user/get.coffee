@@ -11,7 +11,7 @@ describe 'User Get', ->
 
   it 'should allow user get', (done) ->
     email = uuid.v1() + "-test-user@email.com"
-    session.user.createUser {
+    session.user.create {
       firstName: 'Test'
       lastName: 'User'
       email: email

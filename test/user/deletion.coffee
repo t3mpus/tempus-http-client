@@ -11,7 +11,7 @@ describe 'User deletion', ->
 
   it 'should allow user deletion', (done) ->
     email = uuid.v1() + "-test-user@email.com"
-    session.user.createUser {
+    session.user.create {
       firstName: 'Test'
       lastName: 'User'
       email: email
