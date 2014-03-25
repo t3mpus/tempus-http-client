@@ -1,11 +1,12 @@
 users = []
 session = require('../session-store')()
-{filter} = require 'async'
+{filterSeries} = require 'async'
 
 module.exports =
   flush: (cb)->
-    filter users
+    filterSeries users
       ,(u, c) ->
+        session.setCredentials u.credentials
         session.user.delete u.id, (err) ->
           c null, err?
       ,(left) ->
