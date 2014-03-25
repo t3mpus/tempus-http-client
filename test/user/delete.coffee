@@ -3,11 +3,9 @@ index = require '../session-store'
 checker = require './checker'
 uuid = require 'uuid'
 
-describe 'User deletion', ->
+module.exports = ->
 
-  session = null
-
-  before -> session = index()
+  session = index()
 
   it 'should allow user deletion', (done) ->
     email = uuid.v1() + "-test-user@email.com"
