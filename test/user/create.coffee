@@ -1,16 +1,11 @@
 should = require 'should'
-index = require '../session-store'
 sweeper = require './sweeper'
 uuid = require 'uuid'
 checker = require './checker'
 
-describe 'User Creations', ->
+session = require('../session-store')()
 
-  session = null
-
-  before -> session = new index()
-
-  after (done) -> sweeper.flush done
+module.exports = () ->
 
   it 'should allow user creation', (done) ->
     email = uuid.v1() + "-test-user@email.com"
