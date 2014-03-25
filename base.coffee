@@ -52,12 +52,12 @@ class Base
       cb res, resBody
 
 
-  ###
-  # CRUD functionality
-  ###
+  handler: (verb, path, ops, cb) ->
+    if typeof ops is 'function'
+      cb = ops
+      ops = null
 
-  create: (ops, cb)->
-    @request "post", @route(), ops, (res, body) ->
+    @request verb, path, ops, (res, body)->
       if res.statusCode is 200
         cb null, body
       else
@@ -66,26 +66,17 @@ class Base
           message: body.error
         }
 
+  ###
+  # CRUD functionality
+  ###
+
+  create: (ops, cb)->
+    @handler "post", @route(), ops, cb
+
   delete: (id, cb)->
-    @request "del", "#{@route()}/#{id}", (res, body)->
-      if res.statusCode is 200
-        cb null
-      else
-        cb {
-          statusCode: res.statusCode
-          message: body.error or body
-        }
+    @handler "del", "#{@route()}/#{id}", cb
 
   get: (id, cb) ->
-    @request "get", "#{@route()}/#{id}", (res, body)->
-      if res.statusCode is 200
-        cb null, body
-      else
-        cb {
-          statusCode: res.statusCode
-          message: body.error or body
-        }
-
-
+    @handler "get", "#{@route()}/#{id}", cb
 
 module.exports = Base
