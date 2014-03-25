@@ -2,7 +2,7 @@ should = require 'should'
 index = require '../index'
 
 
-describe 'index', ->
+describe 'Main Export', ->
 
   it 'should be a function constructor', ->
     index.should.have.type 'function'
