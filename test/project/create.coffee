@@ -4,8 +4,26 @@ checker = require './checker'
 
 session = require('../session-store')()
 
-module.exports = ->
+getUser = require('./user')
 
-  it 'can create a project'
+module.exports = ->
+  user = null
+
+  before (done) ->
+    getUser (u) ->
+      user = u
+      session.setCredentials user.credentials
+      done()
+
+  it 'can create a project', (done)->
+    session.project.create {
+      name: 'Project Test Create'
+      createdDate: new Date().toJSON()
+    }, (err, project) ->
+      throw err if err
+      sweeper.add project
+      checker project
+      done()
+
 
   it 'will fail bad info'
