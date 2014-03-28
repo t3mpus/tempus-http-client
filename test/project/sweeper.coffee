@@ -15,5 +15,8 @@ module.exports =
           throw new Error 'not all projects deleted'
         cb()
 
-  add: (project)-> projects.push project
+  add: (project)->
+    if not project.user
+      throw new Error "Test projects must attach a user object with credentials"
+    projects.push project
 

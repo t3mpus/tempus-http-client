@@ -21,6 +21,7 @@ module.exports = ->
       createdDate: new Date().toJSON()
     }, (err, project) ->
       throw err if err
+      project.user = user
       sweeper.add project
       checker project
       done()

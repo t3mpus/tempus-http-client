@@ -6,6 +6,7 @@ class TempusHTTPClient
 
     modules = [
       'user'
+      'project'
     ]
 
     _.each modules, (m)=>
