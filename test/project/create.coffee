@@ -27,4 +27,9 @@ module.exports = ->
       done()
 
 
-  it 'will fail bad info'
+  it 'will fail bad info', (done)->
+    session.project.create {
+      badKey: 'badkey'
+    }, (err) ->
+      err.statusCode.should.be.equal 400
+      done()
