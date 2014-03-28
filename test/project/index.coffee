@@ -8,7 +8,7 @@ describe 'Project', ->
 
   describe 'Get', require './get'
 
-  #describe 'Delete', require './delete'
+  describe 'Delete', require './delete'
 
   after (done) ->
     series [flush, userSweeper.flush], done
