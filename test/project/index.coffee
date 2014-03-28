@@ -6,7 +6,7 @@ describe 'Project', ->
 
   describe 'Create', require './create'
 
-  #describe 'Get', require './get'
+  describe 'Get', require './get'
 
   #describe 'Delete', require './delete'
 
