@@ -9,7 +9,7 @@ project = null
 module.exports = (cb) ->
   if user and project
     project.user = user
-    cb project
+    return cb project
   email = v1() + "-test-user@email.com"
   session.user.create {
     firstName: 'Test'
