@@ -17,6 +17,10 @@ module.exports = ->
 
   it 'can get a time entry for project', (done)->
     session.timeEntry.create {
+      start: new Date('May 4 1988')
+      end: new Date()
+      message: "client created entry #{do {v1} = require 'uuid'}"
+      projectId: project.id
     }, (err, entry) ->
       throw err if err
       entry.project = project
