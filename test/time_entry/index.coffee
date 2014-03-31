@@ -5,7 +5,7 @@ projectSweeper = require('../project/sweeper')
 
 describe 'Time Entry', ->
 
-  #describe 'Create', require './create'
+  describe 'Create', require './create'
 
   #describe 'Get', require './get'
 
