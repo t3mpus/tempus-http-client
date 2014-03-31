@@ -7,7 +7,7 @@ module.exports =
     filterSeries time_entries
       ,(t, c) ->
         session = store()
-        session.setCredentials t.user.credentials
+        session.setCredentials t.project.user.credentials
         session.timeEntry.delete t.id, (err) ->
           c null, err?
       ,(left) ->
@@ -16,7 +16,7 @@ module.exports =
         cb()
 
   add: (entry)->
-    if not entry.user
+    if not entry.project?.user?
       throw new Error "Test time entries must attach a user object with credentials"
     time_entries.push entry
 
