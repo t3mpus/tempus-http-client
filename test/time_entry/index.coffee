@@ -9,7 +9,7 @@ describe 'Time Entry', ->
 
   describe 'Get', require './get'
 
-  #describe 'Delete', require './delete'
+  describe 'Delete', require './delete'
 
   after (done) ->
     series [flush, projectSweeper.flush, userSweeper.flush], (err)->
