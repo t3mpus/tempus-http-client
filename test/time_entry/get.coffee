@@ -31,4 +31,8 @@ module.exports = ->
         checker entry
         done()
 
-  it 'cannot get a bad time entry'
+  it 'cannot get a bad time entry', (done)->
+    session.timeEntry.get Number.MAX_VALUE, (err, entry)->
+      err.should.have.property 'statusCode', 404
+      should.ok !entry
+      done()
