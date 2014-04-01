@@ -7,10 +7,14 @@ class TempusHTTPClient
     modules = [
       'user'
       'project'
+      {api: 'timeEntry', module: 'time_entry'}
     ]
 
     _.each modules, (m)=>
-      @[m] = require("./#{m}")(ops)
+      if m.api? and m.module?
+        @[m.api] = require("./#{m.module}")(ops)
+      else
+        @[m] = require("./#{m}")(ops)
 
   setCredentials: (streetCred) ->
     credentials.set streetCred
