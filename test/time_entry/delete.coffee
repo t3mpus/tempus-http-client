@@ -31,4 +31,9 @@ module.exports = ->
           throw err if err
           done()
 
-  it 'cannot delete a non existent time entry'
+  it 'cannot delete a non existent time entry', (done)->
+    session.timeEntry.get Number.MAX_VALUE, (err) ->
+      err.should.have.property 'statusCode', 404
+      session.timeEntry.delete Number.MAX_VALUE, (err)->
+        err.should.have.property 'statusCode', 404
+        done()
