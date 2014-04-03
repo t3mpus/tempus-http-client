@@ -8,6 +8,6 @@ check = (user, created = no) ->
   if created
     user.should.have.property 'credentials'
     user.credentials.should.have.property 'secret'
-    user.credentials.should.have.property 'user_identifier'
+    user.credentials.should.have.property 'userId'
 
 module.exports = check

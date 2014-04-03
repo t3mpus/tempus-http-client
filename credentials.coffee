@@ -1,7 +1,7 @@
 creds = null
 
 valid = (c) ->
-  c?.secret and c?.user_identifier
+  c?.secret and c?.userId
 
 
 module.exports =
@@ -16,7 +16,7 @@ module.exports =
     if valid creds
       return {
         key: creds.secret
-        id: creds.user_identifier
+        id: creds.userId
         algorithm: 'sha256'
       }
     else
