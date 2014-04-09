@@ -36,3 +36,5 @@ module.exports = ->
       err.should.have.property 'statusCode', 404
       should.ok !entry
       done()
+
+  it 'can get time entries for a project'
