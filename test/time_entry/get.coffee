@@ -1,4 +1,6 @@
 should = require 'should'
+async = require 'async'
+_ = require 'underscore'
 sweeper = require './sweeper'
 checker = require './checker'
 
@@ -37,4 +39,26 @@ module.exports = ->
       should.ok !entry
       done()
 
-  it 'can get time entries for a project'
+  createTestEntries = (num, id, cb) ->
+    async.each [1..num], (n, ncb)->
+      session.timeEntry.create {
+        start: new Date('May 4 1988')
+        end: new Date()
+        message: "test entry for project #{do {v4} = require 'uuid'}"
+        projectId: id
+      }, (err, entry)->
+        return ncb(err) if err
+        entry.project = project
+        sweeper.add entry
+        ncb()
+    , cb
+
+
+  it 'can get time entries for a project', (done)->
+    createTestEntries 100, project.id, (err) ->
+      throw err if err
+      session.timeEntry.getForProject project.id, (err, entries)->
+        throw err if err
+        _.each entries, checker
+        done()
+
