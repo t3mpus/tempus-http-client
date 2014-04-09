@@ -1,9 +1,13 @@
 request = require 'request'
+capitalize = require 'capitalize'
+plural = require 'plural'
 credentials = require './credentials'
 
 class Base
 
   constructor: (@options)->
+    if @belongs_to?
+      @establish_belongs_to()
 
   route: (ex, qs)->
     @resource
@@ -65,6 +69,13 @@ class Base
           statusCode: res.statusCode
           message: body.error
         }
+
+  ###
+  # Relationship logic
+  ###
+  establish_belongs_to:()->
+    @["getFor#{capitalize @belongs_to}"] = (id, cb) =>
+      @handler "get", "#{plural @belongs_to, 2}/#{id}/#{@resource}", cb
 
   ###
   # CRUD functionality
